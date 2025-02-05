@@ -8,6 +8,14 @@ public class User {
     private String email;
     private String subscriptionType;
 
+    public User(int userId, String firstName, String lastName, String email, String subscriptionType){
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.subscriptionType = subscriptionType;
+    }
+
     public int getUserId() {
         return userId;
     }
