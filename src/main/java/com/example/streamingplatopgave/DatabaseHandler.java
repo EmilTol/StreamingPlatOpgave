@@ -119,4 +119,24 @@ public class DatabaseHandler {
         }
         return null;
     }
+    public String addFavoriteMovie(User user, Movie movie) {
+        String sql = "INSERT INTO favorites (user_id, movie_id) VALUES (?, ?)";
+        try(Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setInt(1, user.getUserId());
+            preparedStatement.setInt(2, movie.getMovieId());
+            int rowsInserted = preparedStatement.executeUpdate();
+            if(rowsInserted > 0) {
+                return "Favorite movie added successfully";
+            }
+            else {
+                return "Favorite movie failed";
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return "Favorite movie not added";
+    }
+    //Vise film sorteret efter rating
+    //Tilføje favorit
 }
