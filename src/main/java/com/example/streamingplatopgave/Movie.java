@@ -8,6 +8,15 @@ public class Movie {
     private int releaseYear;
     private int rating;
 
+    public Movie(int id, String title, String genre, double duration, int releaseYear, int rating) {
+        this.movieId = id;
+        this.title = title;
+        this.genre = genre;
+        this.duration = duration;
+        this.releaseYear = releaseYear;
+        this.rating = rating;
+    }
+
     public int getMovieId(){
         return movieId;
     }

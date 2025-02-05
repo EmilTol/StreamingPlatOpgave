@@ -138,5 +138,29 @@ public class DatabaseHandler {
         return "Favorite movie not added";
     }
     //Vise film sorteret efter rating
-    //Tilføje favorit
+    public List<Movie> showMoviesByRating(){
+        List<Movie> movies = new ArrayList<>();
+        String sql = "SELECT * FROM movies\n" +
+                "ORDER BY rating desc\n" +
+                ";";
+        try(Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                int movieId = resultSet.getInt("movie_id");
+                String title = resultSet.getString("title");
+                String genre = resultSet.getString("genre");
+                Double duration = resultSet.getDouble("duration");
+                int releaseYear = resultSet.getInt("release_year");
+                int rating = resultSet.getInt("rating");
+                Movie movie = new Movie(movieId, title, genre, duration, releaseYear, rating);
+                movies.add(movie);
+
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return movies;
+    }
 }
