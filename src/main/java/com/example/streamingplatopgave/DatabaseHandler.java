@@ -50,6 +50,28 @@ public class DatabaseHandler {
         }
         return null;
     }
+
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users";
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                int userId = resultSet.getInt("user_id");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String email = resultSet.getString("email");
+                String subscriptionType = resultSet.getString("subscription_type");
+                User user = new User(userId, firstName, lastName, email, subscriptionType);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
     public String updateUserObject(User user) {
         String sql = "UPDATE user SET first_name = ?, SET last_name = ?, email = ?, subscription_type = ? WHERE user_id = ?";
         try(Connection connection = DatabaseConnection.getConnection();
@@ -96,7 +118,7 @@ public class DatabaseHandler {
                 "ON movies.movie_id = favorites.movie_id\n" +
                 "JOIN users\n" +
                 "ON favorites.user_id = users.user_id\n" +
-                "WHERE users.email = \"snabelA\"\n" +
+                "WHERE users.email = ?\n" +
                 ";";
         List<Movie> favoriteMovies = new ArrayList<>();
         try(Connection connection = DatabaseConnection.getConnection();
