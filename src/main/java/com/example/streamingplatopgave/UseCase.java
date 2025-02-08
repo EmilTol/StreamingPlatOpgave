@@ -16,6 +16,12 @@ public class UseCase {
         return db.updateUserObject(user);
     }
 
+//    public String addMovie(int id, String title, String genre, double duration, int releaseYear, int rating){
+//        Movie movie = new Movie(id, title, genre, duration, releaseYear, rating);
+//        return db.addMovieObject(movie);
+//    }
+
+
     public String deleteUser(String email) {
 //        if (email == null || email.isEmpty()) {
 //            return "Skal inkludere email";
