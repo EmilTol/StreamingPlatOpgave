@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.streamingplatopgave.StreamControl1">
+   <children>
+      <Label alignment="CENTER" layoutX="170.0" layoutY="92.0" text="Hello and welcome!" textAlignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="147.0" layoutY="161.0" text="To the streaming platform!">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Button layoutX="225.0" layoutY="220.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="40.0" prefWidth="150.0" text="WELCOME">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="emailField" alignment="CENTER" layoutX="219.0" layoutY="292.0" prefHeight="26.0" prefWidth="165.0" promptText="ENTER YOUR MAIL" />
+   </children>
+</AnchorPane>

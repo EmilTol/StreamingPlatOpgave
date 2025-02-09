@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.streamingplatopgave.StreamControl2">
+   <children>
+      <Label fx:id="nameIdd" layoutX="519.0" layoutY="24.0" text="NAME" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="104.0" text="HELLO">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameId" layoutX="316.0" layoutY="103.0" prefHeight="46.0" prefWidth="145.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="182.0" layoutY="150.0" prefHeight="30.0" prefWidth="252.0" text="What would you like to do?">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="89.0" layoutY="239.0" mnemonicParsing="false" onAction="#switchToScene3" prefHeight="43.0" prefWidth="210.0" text="See favorite movies">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="316.0" layoutY="239.0" mnemonicParsing="false" onAction="#switchToScene4" prefHeight="43.0" prefWidth="194.0" text="See all movies">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button layoutX="278.0" layoutY="333.0" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="26.0" prefWidth="59.0" text="Log out" />
+      <Label fx:id="subscription" layoutX="520.0" layoutY="48.0" prefHeight="18.0" prefWidth="69.0" text="Din sub type" />
+   </children>
+</AnchorPane>

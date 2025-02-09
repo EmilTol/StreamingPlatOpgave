@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.streamingplatopgave.StreamControl3">
+   <children>
+      <TableView fx:id="table1" layoutX="16.0" layoutY="78.0" prefHeight="243.0" prefWidth="570.0">
+        <columns>
+            <TableColumn fx:id="movieId" prefWidth="75.0" text="Movie id" />
+          <TableColumn fx:id="title" prefWidth="128.00006103515625" text="Title" />
+          <TableColumn fx:id="genre" prefWidth="87.199951171875" text="Genre" />
+            <TableColumn fx:id="duration" prefWidth="78.4000244140625" text="Duration" />
+            <TableColumn fx:id="releaseYear" prefWidth="86.39996337890625" text="Release year" />
+            <TableColumn fx:id="rating" prefWidth="72.79998779296875" text="Rating" />
+        </columns>
+      </TableView>
+      <Label layoutX="105.0" layoutY="28.0" text="THESE ARE YOUR FAVORITE MOVIES">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="140.0" layoutY="343.0" mnemonicParsing="false" text="Remove from list" />
+      <Button layoutX="347.0" layoutY="343.0" mnemonicParsing="false" onAction="#switchToScene4" text="Explore new movies" />
+      <Button layoutX="22.0" layoutY="356.0" mnemonicParsing="false" onAction="#switchToScene2" text="START" />
+   </children>
+</AnchorPane>
