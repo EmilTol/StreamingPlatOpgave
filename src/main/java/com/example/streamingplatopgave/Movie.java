@@ -41,9 +41,9 @@ public class Movie {
     }
 
 
-    public List <Movie> getAllMovies(){
-
-    }
+//    public List <Movie> getAllMovies(){
+//
+//    }
 
 
 //import javafx.beans.property.*;
