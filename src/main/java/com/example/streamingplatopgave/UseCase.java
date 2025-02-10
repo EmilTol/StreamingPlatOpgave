@@ -4,7 +4,6 @@ import java.util.List;
 
 public class UseCase {
 
-    String email;
     User user;
     private static final DatabaseHandler db = new DatabaseHandler();
 
