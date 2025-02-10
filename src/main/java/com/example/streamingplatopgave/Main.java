@@ -33,6 +33,7 @@ public class Main extends Application {
         streamControl1.setStage(stage);
         streamControl1.setScene2(scene2);
         streamControl1.setScene3(scene3);
+        streamControl1.setScene4(scene4);
 
         streamControl2.setStage(stage);
         streamControl2.setScene1(scene1);

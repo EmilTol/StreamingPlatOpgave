@@ -64,6 +64,7 @@ public class StreamControl4 {
 
     private ObservableList<Movie> list;
 
+    @FXML
     public void setUserEmail(String email) {
         this.email = email;
         System.out.println("Email received in Scene3: " + email);
