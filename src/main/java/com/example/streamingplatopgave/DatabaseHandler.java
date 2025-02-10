@@ -185,4 +185,21 @@ public class DatabaseHandler {
         }
         return movies;
     }
+    public String removeFromFavoriteMovie(int movieId) {
+        String sql = "DELETE FROM favorites WHERE movie_id = ?";
+        try(Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setInt(1, movieId);
+            int deletedRows = preparedStatement.executeUpdate();
+            if(deletedRows > 0) {
+                return "Favorite movie removed successfully";
+            }
+            else {
+                return "Favorite movie failed";
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return "Favorite movie not removed";
+    }
 }

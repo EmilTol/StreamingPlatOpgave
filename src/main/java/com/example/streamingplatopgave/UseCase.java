@@ -4,6 +4,8 @@ import java.util.List;
 
 public class UseCase {
 
+    String email;
+    User user = new User(0, "", "", "", "");
     private static final DatabaseHandler db = new DatabaseHandler();
 
     public String createUser(String firstName, String lastName, String email, String subscriptionType){
@@ -23,15 +25,28 @@ public class UseCase {
 
 
     public String deleteUser(String email) {
-//        if (email == null || email.isEmpty()) {
-//            return "Skal inkludere email";
-//        }
+        if (email == null || email.isEmpty()) {
+            return "Skal inkludere email";
+        }
         return db.deleteUserObject(email);
     }
 
     public List<User> getAllUsers() {
 
         return db.getAllUsers();
+    }
+
+    public User getUserObject(String email) {
+        user = db.getUserObject(email);
+        int userId = db.getUserObject(email).getUserId();
+        String firstName = db.getUserObject(email).getFirstName();
+        System.out.println(firstName);
+        String lastName = db.getUserObject(email).getLastName();
+        String subscriptionType = db.getUserObject(email).getSubscriptionType();
+
+        user = new User(userId, firstName, lastName, email, subscriptionType);
+        System.out.println(user);
+        return user;
     }
 
 
@@ -43,8 +58,14 @@ public class UseCase {
         return db.getFavoriteMovies(email);
     }
 
-    public String addFavoriteMovie(int userID, int movieID){
-        return db.addFavoriteMovie(userID, movieID);
+    public String addFavoriteMovie(int movieID) {
+        System.out.println(user.getUserId());
+        int userId = user.getUserId();
+        return db.addFavoriteMovie(userId, movieID);
+    }
+    public String removeFavoriteMovie(int movieId){
+        String removed = db.removeFromFavoriteMovie(movieId);
+        return removed;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.streamingplatopgave;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,15 +16,25 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class StreamControl4 implements Initializable{
-//    StreamControl3 streamControl3 = new StreamControl3();
+public class StreamControl4 {
+//    StreamControl1 streamControl1 = new StreamControl1();
 
     private Stage stage;
     private Scene scene2;
+    private String email;
 
-//    private StreamControl3 streamControl3;
+    UseCase useCase = new UseCase();
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 
     @FXML
     private TableView<Movie> table2;
@@ -52,28 +63,20 @@ public class StreamControl4 implements Initializable{
 //    }
 
     private ObservableList<Movie> list;
-    private DatabaseConnection dc;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        dc = new DatabaseConnection();
+    public void setUserEmail(String email) {
+        this.email = email;
+        System.out.println("Email received in Scene3: " + email);
+
+        Platform.runLater(this::loadFromDatabase);
     }
 
     @FXML
-    private void loadFromDatabase(ActionEvent event) {
-        try {
-            Connection conn = dc.getConnection();
-            list = FXCollections.observableArrayList();
-            ResultSet rs = conn.createStatement().executeQuery(
-                    "SELECT * FROM movies");
-            while(rs.next()) {
-                list.add(new Movie(rs.getInt(1),rs.getString(2),rs.getString(3),
-                        rs.getDouble(4),rs.getInt(5),rs.getInt(6)));
-            }
-        }
-        catch (SQLException e){
-            System.err.println("Error"+e);
-        }
+    private void loadFromDatabase() {
+        System.out.println("Fetching movies for: " + email);
+        List <Movie> movies = useCase.getMoviesSortedByRating();
+        list = FXCollections.observableArrayList(movies);
+
         movieId.setCellValueFactory(new PropertyValueFactory<>("movieId"));
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
@@ -85,23 +88,6 @@ public class StreamControl4 implements Initializable{
         table2.setItems(list);
     }
 
-
-//    ObservableList<Movie> list1 = FXCollections.observableArrayList(
-//            new Movie(10, "deadpool","comedy", 120, 2020, 10)
-//    );
-//
-//    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        movieId.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("movieId"));
-//        title.setCellValueFactory(new PropertyValueFactory<Movie, String>("title"));
-//        genre.setCellValueFactory(new PropertyValueFactory<Movie, String>("genre"));
-//        duration.setCellValueFactory(new PropertyValueFactory<Movie, Double>("duration"));
-//        releaseYear.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("releaseYear"));
-//        rating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("rating"));
-//
-//        table2.setItems(list1);
-//    }
-
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -112,29 +98,12 @@ public class StreamControl4 implements Initializable{
     private void switchToScene2() {
         stage.setScene(scene2);
     }
-//    @FXML
-//    void addButton(ActionEvent event) {
-//        // Hent det valgte element fra table2
-//        Movie selectedItem = table2.getSelectionModel().getSelectedItem();
-//
-//        if (selectedItem != null && streamControl3 != null) {
-//            // Tilføj til table1 i StreamControl3
-//            streamControl3.getTable().getItems().add(selectedItem);
-//        }
-//    }
-//    @FXML
-//    void addButton(ActionEvent event) {
-//        Object selectedItem = table2.getSelectionModel().getSelectedItem();
-//
-//        if (selectedItem != null) {
-//            // Tilføj det valgte element til table1s data
-//            streamControl3.getTable.getItems().add(selectedItem);
-//        }
-//    }
-//    @FXML
-//    void addButton(ActionEvent event) {
-//       int selectedId = table2.getSelectionModel().getSelectedIndex();
-//        Movie selectedId = table2.getSelectionModel().getSelectedItem();
-//        streamControl3.getTable().getItems().add(selectedId);
-//    }
+    @FXML
+    public void addToListClicked(ActionEvent event) {
+        int movieId = table2.getSelectionModel().getSelectedItem().getMovieId();
+        System.out.println(movieId);
+//        System.out.println(email);
+        String added = useCase.addFavoriteMovie(movieId);
+        System.out.println(added);
+    }
 }

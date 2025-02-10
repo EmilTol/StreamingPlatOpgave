@@ -35,6 +35,10 @@ public class User {
     public String getSubscriptionType() {
         return subscriptionType;
     }
+    @Override
+    public String toString() {
+        return ("Id: " + userId + " First Name: " + firstName + " Last Name: " + lastName + " Email: " + email + " Subscription Type: " + subscriptionType);
+    }
 }
 
 

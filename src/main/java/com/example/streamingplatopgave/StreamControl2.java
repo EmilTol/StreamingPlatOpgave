@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 
-public class StreamControl2 implements Initializable {
+public class StreamControl2{
 
     private Stage stage;
     private Scene scene1;
@@ -31,13 +31,10 @@ public class StreamControl2 implements Initializable {
 
     private String email;
 
-    private DatabaseConnection dc;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        dc = new DatabaseConnection();
+    public UseCase useCase = new UseCase();
+    public String getEmail(){
+        return email;
     }
-
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -57,32 +54,9 @@ public class StreamControl2 implements Initializable {
         loadUsername();
     }
     private void loadUsername() {
-        String query = "SELECT first_name, subscription_type FROM users WHERE email =?";
-        System.out.println("loading username for email: " + email);
-        try (Connection conn = dc.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1,email);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                String username = rs.getString("first_name");
-                String sub = rs.getString("subscription_type");
-                System.out.println("user found: " + username);
-                System.out.println("subscription found: " + sub);
-//                System.out.println("Label: " + nameId);
-                nameId.setText(username);
-                nameIdd.setText(username);
-                subscription.setText(sub);
-//                Platform.runLater(() -> nameId.setText(username));
-            } else {
-                nameId.setText("User not found");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            nameId.setText("Error loading user");
-        }
-
+        useCase.getUserObject(email);
     }
+
     @FXML
     private void switchToScene1() {
         stage.setScene(scene1);

@@ -10,6 +10,9 @@ public class StreamControl1 {
     private Stage stage;
     private Scene scene2;
     private Scene scene3;
+
+    UseCase useCase = new UseCase();
+
     @FXML
     private TextField emailField;
 
@@ -23,13 +26,18 @@ public class StreamControl1 {
         this.scene3 = scene3;
     }
 
+
     @FXML
     private void switchToScene2() {
         String email = emailField.getText();
+        User user = useCase.getUserObject(email);
+        System.out.println(user);
         StreamControl2 scene2Controller = (StreamControl2) scene2.getUserData();
         StreamControl3 scene3Controller = (StreamControl3) scene3.getUserData();// Hent eksisterende controller
         scene2Controller.setUserEmail(email);
         scene3Controller.setUserEmail(email);
+
+
 
         stage.setScene(scene3);
         stage.setScene(scene2);

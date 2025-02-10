@@ -50,6 +50,8 @@ public class Main extends Application {
         streamControl4.setStage(stage);
         streamControl4.setScene2(scene2);
 
+        scene4.setUserData(streamControl4);
+
         stage.setScene(scene1);
         stage.show();
 
