@@ -5,7 +5,7 @@ import java.util.List;
 public class UseCase {
 
     String email;
-    User user = new User(0, "", "", "", "");
+    User user;
     private static final DatabaseHandler db = new DatabaseHandler();
 
     public String createUser(String firstName, String lastName, String email, String subscriptionType){
@@ -17,12 +17,6 @@ public class UseCase {
         User user = new User(userId, firstName, lastName, email, subscriptionType);
         return db.updateUserObject(user);
     }
-
-//    public String addMovie(int id, String title, String genre, double duration, int releaseYear, int rating){
-//        Movie movie = new Movie(id, title, genre, duration, releaseYear, rating);
-//        return db.addMovieObject(movie);
-//    }
-
 
     public String deleteUser(String email) {
         if (email == null || email.isEmpty()) {
@@ -38,17 +32,8 @@ public class UseCase {
 
     public User getUserObject(String email) {
         user = db.getUserObject(email);
-        int userId = db.getUserObject(email).getUserId();
-        String firstName = db.getUserObject(email).getFirstName();
-        System.out.println(firstName);
-        String lastName = db.getUserObject(email).getLastName();
-        String subscriptionType = db.getUserObject(email).getSubscriptionType();
-
-        user = new User(userId, firstName, lastName, email, subscriptionType);
-        System.out.println(user);
         return user;
     }
-
 
     public List<Movie> getMoviesSortedByRating(){
         return db.showMoviesByRating();
@@ -58,7 +43,8 @@ public class UseCase {
         return db.getFavoriteMovies(email);
     }
 
-    public String addFavoriteMovie(int movieID) {
+    public String addFavoriteMovie(String email, int movieID) {
+        user = getUserObject(email);
         System.out.println(user.getUserId());
         int userId = user.getUserId();
         return db.addFavoriteMovie(userId, movieID);

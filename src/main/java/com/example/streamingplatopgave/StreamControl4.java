@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class StreamControl4 {
-//    StreamControl1 streamControl1 = new StreamControl1();
 
     private Stage stage;
     private Scene scene2;
@@ -56,11 +55,6 @@ public class StreamControl4 {
 
     @FXML
     private TableColumn<Movie, Integer> rating;
-
-
-//    public void setStreamControl3(StreamControl3 streamControl3) {
-//        this.streamControl3 = streamControl3;
-//    }
 
     private ObservableList<Movie> list;
 
@@ -103,8 +97,7 @@ public class StreamControl4 {
     public void addToListClicked(ActionEvent event) {
         int movieId = table2.getSelectionModel().getSelectedItem().getMovieId();
         System.out.println(movieId);
-//        System.out.println(email);
-        String added = useCase.addFavoriteMovie(movieId);
+        String added = useCase.addFavoriteMovie(email, movieId);
         System.out.println(added);
     }
 }

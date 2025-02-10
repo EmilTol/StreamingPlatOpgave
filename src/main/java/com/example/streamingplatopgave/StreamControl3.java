@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -49,7 +50,9 @@ public class StreamControl3 {
     @FXML
     private TableColumn<Movie, Integer> rating;
 
-    private ObservableList<Movie> list;
+    List<Movie> movieList = new ArrayList<>();
+
+    private ObservableList<Movie> list = FXCollections.observableArrayList(movieList);
 
     public UseCase useCase = new UseCase();
 
@@ -68,6 +71,7 @@ public class StreamControl3 {
         duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         releaseYear.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
         rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+
     }
 
     public void setUserEmail(String email) {
@@ -81,8 +85,8 @@ public class StreamControl3 {
     private void loadFromDatabase() {
 
         System.out.println("Fetching movies for: " + email);
-        List<Movie> movies = useCase.getFavoriteMoviesByEmail(email);
-        list = FXCollections.observableArrayList(movies);
+        movieList = useCase.getFavoriteMoviesByEmail(email);
+        list.setAll(movieList);
 
         table1.setItems(null);
         table1.setItems(list);
@@ -108,9 +112,15 @@ public class StreamControl3 {
     @FXML
     public void removeFromFavoriteMoviesClicked(ActionEvent event) {
         String removed = useCase.removeFavoriteMovie(table1.getSelectionModel().getSelectedItem().getMovieId());
-        List<Movie> movies = useCase.getFavoriteMoviesByEmail(email);
-        list = FXCollections.observableArrayList(movies);
+        movieList = useCase.getFavoriteMoviesByEmail(email);
+        list = FXCollections.observableArrayList(movieList);
 
+        table1.setItems(null);
+        table1.setItems(list);
+    }
+    public void setFavorites(){
+        movieList = useCase.getFavoriteMoviesByEmail(email);
+        list.setAll(movieList);
         table1.setItems(null);
         table1.setItems(list);
     }

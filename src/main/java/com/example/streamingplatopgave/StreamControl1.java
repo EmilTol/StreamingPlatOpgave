@@ -43,6 +43,7 @@ public class StreamControl1 {
         scene3Controller.setUserEmail(email);
         scene4Controller.setUserEmail(email);
 
+        stage.setScene(scene4);
         stage.setScene(scene3);
         stage.setScene(scene2);
     }
