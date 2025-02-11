@@ -71,6 +71,7 @@ public class StreamControl3 {
         duration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         releaseYear.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
         rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        setFavorites();
 
     }
 
@@ -87,7 +88,6 @@ public class StreamControl3 {
         System.out.println("Fetching movies for: " + email);
         movieList = useCase.getFavoriteMoviesByEmail(email);
         list.setAll(movieList);
-
         table1.setItems(null);
         table1.setItems(list);
     }
@@ -114,14 +114,13 @@ public class StreamControl3 {
         String removed = useCase.removeFavoriteMovie(table1.getSelectionModel().getSelectedItem().getMovieId());
         movieList = useCase.getFavoriteMoviesByEmail(email);
         list = FXCollections.observableArrayList(movieList);
-
         table1.setItems(null);
         table1.setItems(list);
     }
     public void setFavorites(){
         movieList = useCase.getFavoriteMoviesByEmail(email);
         list.setAll(movieList);
-        table1.setItems(null);
-        table1.setItems(list);
+        table1.refresh();
+        System.out.println("favorites");
     }
 }

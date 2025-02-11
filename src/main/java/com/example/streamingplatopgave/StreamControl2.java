@@ -64,6 +64,7 @@ public class StreamControl2{
     @FXML
     private void switchToScene3() {
         stage.setScene(scene3);
+        stage.show();
     }
     @FXML
     private void switchToScene4() {
